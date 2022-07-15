@@ -40,8 +40,19 @@ import { Button } from "../../components/Button";
 
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
+import { useNavigation } from "@react-navigation/native";
 
 export function SchedulingDetails() {
+  const navigation = useNavigation<any>();
+
+  function handleSchedulingComplete() {
+    navigation.navigate("SchedulingComplete");
+  }
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   const theme = useTheme();
   return (
     <Container>
@@ -51,7 +62,7 @@ export function SchedulingDetails() {
         backgroundColor="transparent"
       />
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleGoBack} />
       </Header>
       <CarImages>
         <ImageSlider
@@ -95,7 +106,6 @@ export function SchedulingDetails() {
               <DateValue>18/06/2021</DateValue>
             </DateInfo>
             <Feather
-        
               name="chevron-right"
               size={RFValue(20)}
               color={theme.colors.text}
@@ -118,7 +128,11 @@ export function SchedulingDetails() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" />
+        <Button
+          title="Alugar agora"
+          onPress={handleSchedulingComplete}
+          color={theme.colors.success}
+        />
       </Footer>
     </Container>
   );

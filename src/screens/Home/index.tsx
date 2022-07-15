@@ -6,8 +6,12 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { Car } from "../../components/Car";
 import { useNavigation } from "@react-navigation/native";
 
+type Navigator = {
+  navigate: any;
+};
+
 export function Home() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<Navigator>();
   const carData = {
     brand: "AUDI",
     name: "RS 5",

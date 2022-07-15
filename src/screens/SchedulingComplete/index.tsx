@@ -5,10 +5,17 @@ import { Container, Content, Footer, Message, Title } from "./styles";
 import { useTheme } from "styled-components";
 import { useWindowDimensions } from "react-native";
 import { ConfirmButton } from "../../components/ConfirmButton";
+import { useNavigation } from "@react-navigation/native";
+
+
 
 export function SchedulingComplete() {
-  const theme = useTheme();
   const { width } = useWindowDimensions();
+  const navigation = useNavigation<any>();
+
+  function handleHome() {
+    navigation.navigate("Home");
+  }
   return (
     <Container>
       <LogoSvg width={width} />
@@ -24,7 +31,7 @@ export function SchedulingComplete() {
         </Message>
       </Content>
       <Footer>
-        <ConfirmButton title="OK" />
+        <ConfirmButton title="OK" onPress={handleHome} />
       </Footer>
     </Container>
   );

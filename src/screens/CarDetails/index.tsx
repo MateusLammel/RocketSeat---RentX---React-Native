@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { StatusBar, Text } from "react-native";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
 import SpeedSvg from "../../assets/speed.svg";
@@ -27,12 +27,28 @@ import {
   Footer,
 } from "./styles";
 import { Button } from "../../components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export function CarDetails() {
+  const navigation = useNavigation<any>();
+
+  function handleScheduling() {
+    navigation.navigate("Scheduling");
+  }
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+        />
+        <BackButton onPress={handleGoBack} />
       </Header>
       <CarImages>
         <ImageSlider
@@ -61,7 +77,7 @@ export function CarDetails() {
           <Accessory name="450 HP" icon={ForceSvg} />
           <Accessory name="Gasolina" icon={GasolineSvg} />
           <Accessory name="Auto" icon={ExchangeSvg} />
-          <Accessory name="5 pessoas" icon={PeopleSvg}/>
+          <Accessory name="5 pessoas" icon={PeopleSvg} />
         </Accessories>
 
         <About>
@@ -72,7 +88,10 @@ export function CarDetails() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" />
+        <Button
+          title="Escolher período do aluguel"
+          onPress={handleScheduling}
+        />
       </Footer>
     </Container>
   );
