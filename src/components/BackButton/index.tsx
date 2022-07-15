@@ -2,9 +2,9 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Container } from "./styles";
 import { useTheme } from "styled-components";
-import { TouchableHighlightProps } from "react-native";
+import {  TouchableOpacityProps } from "react-native";
 
-interface Props extends TouchableHighlightProps {
+interface Props extends TouchableOpacityProps {
   color?: string;
 }
 
@@ -14,7 +14,7 @@ export function BackButton({ color, ...rest }: Props) {
     <Container {...rest}>
       <MaterialIcons
         name="chevron-left"
-        size={24}
+        size={28}
         color={color ? color : theme.colors.text}
       />
     </Container>

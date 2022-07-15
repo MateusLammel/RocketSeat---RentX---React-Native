@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { StatusBar, Text } from "react-native";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
 import SpeedSvg from "../../assets/speed.svg";
@@ -8,6 +8,7 @@ import GasolineSvg from "../../assets/gasoline.svg";
 import ExchangeSvg from "../../assets/exchange.svg";
 import PeopleSvg from "../../assets/people.svg";
 import ForceSvg from "../../assets/force.svg";
+import { Feather } from "@expo/vector-icons";
 
 import { ImageSlider } from "../../components/ImageSlider";
 import {
@@ -22,15 +23,33 @@ import {
   Period,
   Price,
   Rent,
-  About,
   Accessories,
   Footer,
+  DateInfo,
+  DateTitle,
+  CalendarIcon,
+  RentalPrice,
+  RentalPriceLabel,
+  RentalPriceDetails,
+  RentalPriceTotal,
+  RentalPriceQuota,
+  RentalPeriod,
+  DateValue,
 } from "./styles";
 import { Button } from "../../components/Button";
 
-export function CarDetails() {
+import { RFValue } from "react-native-responsive-fontsize";
+import { useTheme } from "styled-components";
+
+export function SchedulingDetails() {
+  const theme = useTheme();
   return (
     <Container>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <Header>
         <BackButton onPress={() => {}} />
       </Header>
@@ -61,14 +80,41 @@ export function CarDetails() {
           <Accessory name="450 HP" icon={ForceSvg} />
           <Accessory name="Gasolina" icon={GasolineSvg} />
           <Accessory name="Auto" icon={ExchangeSvg} />
-          <Accessory name="5 pessoas" icon={PeopleSvg}/>
-        </Accessories>
+          <Accessory name="5 pessoas" icon={PeopleSvg} />
 
-        <About>
-          O Audi RS5 registra velocidade máxima de 280 km/h e aceleração de 0 a
-          100 km/h em 3,9 segundos graças ao motor 2.9 V6 biturbo, de 450 cv de
-          potência e 61,1 kgfm de torque.
-        </About>
+          <RentalPeriod>
+            <CalendarIcon>
+              <Feather
+                name="calendar"
+                size={RFValue(24)}
+                color={theme.colors.shape}
+              />
+            </CalendarIcon>
+            <DateInfo>
+              <DateTitle>DE</DateTitle>
+              <DateValue>18/06/2021</DateValue>
+            </DateInfo>
+            <Feather
+        
+              name="chevron-right"
+              size={RFValue(20)}
+              color={theme.colors.text}
+            />
+            <DateInfo>
+              <DateTitle>ATÉ</DateTitle>
+              <DateValue>18/06/2021</DateValue>
+            </DateInfo>
+          </RentalPeriod>
+
+          <RentalPrice>
+            <RentalPriceLabel>TOTAL</RentalPriceLabel>
+
+            <RentalPriceDetails>
+              <RentalPriceQuota>R$ 590,00 x3</RentalPriceQuota>
+              <RentalPriceTotal>R$ 2.300,00</RentalPriceTotal>
+            </RentalPriceDetails>
+          </RentalPrice>
+        </Accessories>
       </Content>
 
       <Footer>
