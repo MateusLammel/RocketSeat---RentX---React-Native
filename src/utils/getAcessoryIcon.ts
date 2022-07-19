@@ -14,17 +14,17 @@ export function getAcessoryIcon(type: string) {
       return SpeedSvg;
     case "acceleration":
       return AccelerationSvg;
-    case "gasoline":
+    case "gasoline_motor":
       return GasolineSvg;
     case "exchange":
       return ExchangeSvg;
-    case "people":
+    case "seats":
       return PeopleSvg;
-    case "force":
+    case "turning_diameter":
       return ForceSvg;
-    case "energy":
+    case "electric_motor":
       return EnergySvg;
-    case "hybrid":
+    case "hybrid_motor":
       return HybridSvg;
     default:
       return CarSvg;
