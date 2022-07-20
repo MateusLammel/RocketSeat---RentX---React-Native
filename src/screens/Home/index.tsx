@@ -44,22 +44,25 @@ export function Home() {
         backgroundColor="transparent"
         translucent
       />
-      <Header>
-        <HeaderContent>
-          <Logo width={RFValue(108)} height={RFValue(12)} />
-          <TotalCars>Total de {cars.length}</TotalCars>
-        </HeaderContent>
-      </Header>
       {loading ? (
         <Load />
       ) : (
-        <CarList
-          data={cars}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => (
-            <Car data={item} onPress={() => handleCarDetails(item)} />
-          )}
-        />
+        <>
+          <Header>
+            <HeaderContent>
+              <Logo width={RFValue(108)} height={RFValue(12)} />
+              <TotalCars>Total de {cars.length}</TotalCars>
+            </HeaderContent>
+          </Header>
+
+          <CarList
+            data={cars}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({ item }) => (
+              <Car data={item} onPress={() => handleCarDetails(item)} />
+            )}
+          />
+        </>
       )}
     </Container>
   );
