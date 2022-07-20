@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { BackButton } from "../../components/BackButton";
 import {
   Container,
@@ -21,18 +21,16 @@ import {
   generateInterval,
   MarkedDateProps,
 } from "../../components/Calendar";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { forModalPresentationIOS } from "@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators";
 import { format } from "date-fns/esm";
 import { getPlatformDate } from "../../utils/getPlatformDate";
-import { CarDTO } from "../../dtos/CarDTO";
 
 interface RentalPeriod {
+  start: number;
   startFormatted: string;
+  end: number;
   endFormatted: string;
-}
-interface Params {
-  car: CarDTO;
 }
 
 export function Scheduling() {
@@ -47,18 +45,9 @@ export function Scheduling() {
   );
   const theme = useTheme();
   const navigation = useNavigation<any>();
-  const route = useRoute();
-  const { car } = route.params as Params;
 
   function handleSchedulingDetails() {
-    if (!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
-      Alert.alert("Selecione o intervalo para alugar.");
-    } else {
-      navigation.navigate("SchedulingDetails", {
-        car,
-        dates: Object.keys(markedDate),
-      });
-    }
+    navigation.navigate("SchedulingDetails");
   }
   function handleGoBack() {
     navigation.goBack();
@@ -81,6 +70,8 @@ export function Scheduling() {
     const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
 
     setRentalPeriod({
+      start: start.timestamp,
+      end: end.timestamp,
       startFormatted: format(
         getPlatformDate(new Date(firstDate)),
         "dd/MM/yyyy"
@@ -115,11 +106,7 @@ export function Scheduling() {
       <Content>
         <Calendar markedDates={markedDate} onDayPress={handleChangeDate} />
         <Footer>
-          <Button
-            enabled={!!rentalPeriod.startFormatted}
-            title="Confirmar"
-            onPress={handleSchedulingDetails}
-          />
+          <Button title="Confirmar" onPress={handleSchedulingDetails} />
         </Footer>
       </Content>
     </Container>

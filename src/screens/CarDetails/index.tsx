@@ -1,7 +1,8 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, } from "react-native";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
+
 
 import { ImageSlider } from "../../components/ImageSlider";
 import {
@@ -25,6 +26,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { CarDTO } from "../../dtos/CarDTO";
 import { getAcessoryIcon } from "../../utils/getAcessoryIcon";
 
+
 interface Params {
   car: CarDTO;
 }
@@ -36,7 +38,7 @@ export function CarDetails() {
   const { car } = route.params as Params;
 
   function handleScheduling() {
-    navigation.navigate("Scheduling", { car });
+    navigation.navigate("Scheduling");
   }
 
   function handleGoBack() {
@@ -54,7 +56,9 @@ export function CarDetails() {
         <BackButton onPress={handleGoBack} />
       </Header>
       <CarImages>
-        <ImageSlider imagesUrl={car.photos} />
+        <ImageSlider
+          imagesUrl={car.photos}
+        />
       </CarImages>
 
       <Content>
@@ -85,7 +89,6 @@ export function CarDetails() {
 
       <Footer>
         <Button
-          enabled={true}
           title="Escolher período do aluguel"
           onPress={handleScheduling}
         />
