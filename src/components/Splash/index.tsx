@@ -56,6 +56,7 @@ export function Splash() {
       () => {
         "worklet";
         runOnJS(startApp)();
+        
       }
     );
   }, []);
