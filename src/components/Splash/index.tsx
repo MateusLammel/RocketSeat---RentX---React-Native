@@ -14,7 +14,7 @@ import Animated, {
 import { useNavigation } from "@react-navigation/native";
 
 export function Splash() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   function startApp() {
     navigation.navigate("Home");
@@ -56,7 +56,6 @@ export function Splash() {
       () => {
         "worklet";
         runOnJS(startApp)();
-        
       }
     );
   }, []);
