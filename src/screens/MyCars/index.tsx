@@ -23,6 +23,7 @@ import {
   Title,
 } from "./styles";
 import { Load } from "../../components/Load";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 interface CarProps {
   car: CarDTO;
@@ -65,7 +66,7 @@ export function MyCars() {
         <SubTitle>Conforto, segurança e praticidade</SubTitle>
       </Header>
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <Content>
           <Appointments>

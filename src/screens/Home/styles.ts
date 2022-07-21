@@ -36,16 +36,3 @@ export const CarList = styled(FlatList as new () => FlatList<CarDTO>).attrs({
   showsVerticalScrollIndicator: false,
 })``;
 
-export const MyCarsButton = styled(TouchableOpacity).attrs({
-  activeOpacity: 0.8,
-})`
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  background-color: ${({ theme }) => theme.colors.main};
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-`;
