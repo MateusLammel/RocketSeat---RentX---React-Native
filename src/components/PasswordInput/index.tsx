@@ -30,19 +30,24 @@ export function PasswordInput({ iconName, value, ...rest }: Props) {
   }
 
   return (
-    <Container isFocused={isFocused}>
-      <IconContainer>
-        <Feather name={iconName} size={24} color={
+    <Container>
+      <IconContainer isFocused={isFocused}>
+        <Feather
+          name={iconName}
+          size={24}
+          color={
             isFocused || isFilled ? theme.colors.main : theme.colors.text_detail
-          } />
+          }
+        />
       </IconContainer>
       <InputText
+      
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...rest}
         secureTextEntry={passwordVisbility}
       />
-      <IconContainer>
+      <IconContainer i>
         <TouchableOpacity onPress={handleVisibility}>
           <Feather
             name={passwordVisbility ? "eye" : "eye-off"}

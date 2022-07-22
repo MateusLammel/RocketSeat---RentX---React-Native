@@ -9,12 +9,16 @@ import { SchedulingComplete } from "../screens/SchedulingComplete";
 import { Splash } from "../components/Splash";
 import { MyCars } from "../screens/MyCars";
 import { SignIn } from "../screens/SignIn";
+import { FirstStep } from "../screens/SignUp/FirstStep";
+import { SecondStep } from "../screens/SignUp/SecondStep";
 
 const { Navigator, Screen } = createStackNavigator();
 
 export function StackRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
+      <Screen name="FirstStep" component={FirstStep} />
+      <Screen name="SecondStep" component={SecondStep} />
       <Screen name="SignIn" component={SignIn} />
       <Screen name="Splash" component={Splash} />
       <Screen
