@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Alert, StatusBar, Text } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
-import SpeedSvg from "../../assets/speed.svg";
-import AccelerationSvg from "../../assets/acceleration.svg";
-import GasolineSvg from "../../assets/gasoline.svg";
-import ExchangeSvg from "../../assets/exchange.svg";
-import PeopleSvg from "../../assets/people.svg";
-import ForceSvg from "../../assets/force.svg";
 import { Feather } from "@expo/vector-icons";
-
 import { ImageSlider } from "../../components/ImageSlider";
 import {
   Name,
@@ -37,7 +30,6 @@ import {
   DateValue,
 } from "./styles";
 import { Button } from "../../components/Button";
-
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -67,7 +59,7 @@ export function SchedulingDetails() {
   const route = useRoute();
   const { car, dates } = route.params as Params;
   const [loading, setLoading] = useState(false);
-  const rentTotal = Number(dates.length) * car.rent.price;
+  const rentTotal = Number(dates.length) * car.price;
 
   async function handleSchedulingComplete() {
     setLoading(true);
@@ -93,7 +85,10 @@ export function SchedulingDetails() {
         id: car.id,
         unavailable_dates,
       })
-      .then((response) => navigation.navigate("SchedulingComplete"))
+      .then((response) => navigation.navigate("Confirmation", {
+        title: "Carro alugado",
+        message: `Agora você só precisa ir\naté a concessionáriada RENTX\npegar o seu automóvel`
+      }))
       .catch(() => {
         Alert.alert("Ocorreu um erro no agendamento");
         setLoading(false);
@@ -136,8 +131,8 @@ export function SchedulingDetails() {
           </Description>
 
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
 
@@ -178,7 +173,7 @@ export function SchedulingDetails() {
 
           <RentalPriceDetails>
             <RentalPriceQuota>
-              R$ {car.rent.price} x {dates.length} diárias
+              R$ {car.price} x {dates.length} diárias
             </RentalPriceQuota>
             <RentalPriceTotal>R$ {rentTotal}</RentalPriceTotal>
           </RentalPriceDetails>

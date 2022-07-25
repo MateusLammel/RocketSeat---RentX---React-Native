@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  BackHandler,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
@@ -12,7 +11,6 @@ import { Car } from "../../components/Car";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
-import { Load } from "../../components/Load";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
 import Animated, {
@@ -49,11 +47,7 @@ export function Home() {
     fetchCars();
   }, []);
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      return true;
-    });
-  }, []);
+ 
 
   function handleCarDetails(car: CarDTO) {
     navigation.navigate("CarDetails", { car });

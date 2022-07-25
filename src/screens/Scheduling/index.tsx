@@ -22,7 +22,6 @@ import {
   MarkedDateProps,
 } from "../../components/Calendar";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { forModalPresentationIOS } from "@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators";
 import { format } from "date-fns/esm";
 import { getPlatformDate } from "../../utils/getPlatformDate";
 import { CarDTO } from "../../dtos/CarDTO";

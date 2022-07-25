@@ -17,7 +17,7 @@ export function Splash() {
   const navigation = useNavigation<any>();
 
   function startApp() {
-    navigation.navigate("Home");
+    navigation.navigate("SignIn");
   }
 
   const logoAnimation = useSharedValue(0);
