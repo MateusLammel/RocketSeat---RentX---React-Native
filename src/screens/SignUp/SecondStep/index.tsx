@@ -10,8 +10,8 @@ import { useTheme } from "styled-components";
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
 import { Button } from "../../../components/Button";
+import { Input } from "../../../components/Input";
 import { PasswordInput } from "../../../components/PasswordInput";
-import api from "../../../services/api";
 import {
   Container,
   Form,
@@ -40,30 +40,13 @@ export function SecondStep() {
 
   const { user } = route.params as UserParams;
 
-  async function handleRegister() {
+  function handleRegister() {
     if (!passwordConfirm || !password) {
       return Alert.alert("Informe a senha e a confirmação");
     }
     if (password != passwordConfirm) {
       return Alert.alert("As senhas não são iguais");
     }
-
-    await api
-      .post("/users", {
-        name: user.name,
-        email: user.email,
-        password,
-        driver_license: user.driverLicense,
-      })
-      .then(() => {
-        navigation.navigate("Confirmation", {
-          title: "Conta criada!",
-          message: `Agora é só fazer login\ne aproveitar`,
-          nextScreen: "SignIn"
-        });
-      }).catch(() => {
-        Alert.alert("Erro", "Não foi possível fazer o cadastro")
-      })
   }
 
   function handleBack() {

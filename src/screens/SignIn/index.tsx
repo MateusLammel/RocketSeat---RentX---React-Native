@@ -12,12 +12,10 @@ import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Footer, Form, Header, SubTitle, Title } from "./styles";
 import * as Yup from "yup";
-import { useAuth } from "../../hooks/auth";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn } = useAuth();
 
   async function handleSignIn() {
     try {
@@ -32,8 +30,6 @@ export function SignIn() {
         email,
         password,
       });
-
-      signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         return Alert.alert("Opa", error.message);
@@ -83,7 +79,7 @@ export function SignIn() {
           <Footer>
             <Button
               title="Login"
-              onPress={handleSignIn}
+              onPress={() => {
                 handleSignIn;
               }}
               enabled={true}

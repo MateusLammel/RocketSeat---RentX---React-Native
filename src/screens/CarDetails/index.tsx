@@ -2,6 +2,7 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
+
 import { ImageSlider } from "../../components/ImageSlider";
 import {
   Name,
@@ -64,8 +65,8 @@ export function CarDetails() {
           </Description>
 
           <Rent>
-            <Period>{car.period}</Period>
-            <Price>R$ {car.price}</Price>
+            <Period>{car.rent.period}</Period>
+            <Price>R$ {car.rent.price}</Price>
           </Rent>
         </Details>
 
