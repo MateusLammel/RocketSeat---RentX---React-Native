@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Keyboard,
@@ -12,6 +12,8 @@ import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Footer, Form, Header, SubTitle, Title } from "./styles";
 import * as Yup from "yup";
+import { User } from "../../database/models/User";
+import { userSchema } from "../../database/schema/userSchema";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
@@ -38,6 +40,8 @@ export function SignIn() {
       }
     }
   }
+
+  
 
   const theme = useTheme();
   return (
@@ -67,7 +71,7 @@ export function SignIn() {
               onChangeText={setEmail}
               value={email}
             />
-          
+
             <PasswordInput
               iconName="lock"
               placeholder="Senha"

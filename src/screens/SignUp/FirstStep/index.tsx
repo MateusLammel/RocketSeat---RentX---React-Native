@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Keyboard,
@@ -11,6 +11,9 @@ import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
+import { database } from "../../../database";
+import { User } from "../../../database/models/User";
+import { userSchema } from "../../../database/schema/userSchema";
 import {
   Container,
   Form,
@@ -54,6 +57,16 @@ export function FirstStep() {
       }
     }
   }
+
+  useEffect(() => {
+    async function loadData() {
+      const userCollection = database.get("users");
+      const users = await userCollection.query().fetch();
+      console.log(users);
+    }
+
+    loadData();
+  }, []);
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
