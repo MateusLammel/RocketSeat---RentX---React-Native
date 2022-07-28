@@ -61,7 +61,8 @@ export function SecondStep() {
           message: `Agora é só fazer login\ne aproveitar`,
           nextScreen: "SignIn"
         });
-      }).catch(() => {
+      }).catch((error) => {
+        console.log(error)
         Alert.alert("Erro", "Não foi possível fazer o cadastro")
       })
   }

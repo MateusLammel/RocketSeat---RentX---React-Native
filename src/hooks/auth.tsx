@@ -42,8 +42,6 @@ function AuthProvider({ children }: AuthProviderPops) {
     const { token, user } = response.data;
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setData({ token, user });
-
-    
   }
 
   return (
