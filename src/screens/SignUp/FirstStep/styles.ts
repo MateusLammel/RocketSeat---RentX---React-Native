@@ -31,7 +31,7 @@ export const SubTitle = styled.Text`
   font-size: ${RFValue(16)}px;
   font-family: ${({ theme }) => theme.fonts.primary_400};
   color: ${({ theme }) => theme.colors.text};
-  line-height: ${RFValue(25)};
+  line-height: ${RFValue(25)}px;
 `;
 
 export const Form = styled.View`

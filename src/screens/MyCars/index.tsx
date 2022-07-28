@@ -22,6 +22,7 @@ import {
   SubTitle,
   Title,
 } from "./styles";
+import { Load } from "../../components/Load";
 import { LoadAnimation } from "../../components/LoadAnimation";
 
 interface CarProps {

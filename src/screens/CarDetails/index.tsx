@@ -2,6 +2,7 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
+
 import { ImageSlider } from "../../components/ImageSlider";
 import {
   Name,

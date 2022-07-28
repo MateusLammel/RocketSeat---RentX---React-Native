@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Keyboard,
@@ -12,12 +12,12 @@ import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Footer, Form, Header, SubTitle, Title } from "./styles";
 import * as Yup from "yup";
-import { useAuth } from "../../hooks/auth";
+import { User } from "../../database/models/User";
+import { userSchema } from "../../database/schema/userSchema";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn } = useAuth();
 
   async function handleSignIn() {
     try {
@@ -32,8 +32,6 @@ export function SignIn() {
         email,
         password,
       });
-
-      signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         return Alert.alert("Opa", error.message);
@@ -42,6 +40,8 @@ export function SignIn() {
       }
     }
   }
+
+  
 
   const theme = useTheme();
   return (
@@ -71,7 +71,7 @@ export function SignIn() {
               onChangeText={setEmail}
               value={email}
             />
-          
+
             <PasswordInput
               iconName="lock"
               placeholder="Senha"
@@ -83,7 +83,7 @@ export function SignIn() {
           <Footer>
             <Button
               title="Login"
-              onPress={handleSignIn}
+              onPress={() => {
                 handleSignIn;
               }}
               enabled={true}
