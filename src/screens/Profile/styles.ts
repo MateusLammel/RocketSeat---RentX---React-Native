@@ -5,7 +5,6 @@ import {
   getBottomSpace,
   getStatusBarHeight,
 } from "react-native-iphone-x-helper";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { css } from "styled-components";
 
 interface OptionProps {
@@ -35,7 +34,7 @@ export const HeaderTitle = styled.Text`
   color: ${({ theme }) => theme.colors.background_secondary};
   font-family: ${({ theme }) => theme.fonts.secondary_600};
 `;
-export const LogoutButton = styled(BorderlessButton)``;
+export const LogoutButton = styled(TouchableOpacity)``;
 export const PhotoContainer = styled.View`
   width: 180px;
   height: 180px;

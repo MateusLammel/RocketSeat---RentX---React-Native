@@ -19,18 +19,20 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
 import { Input } from "../../components/Input";
-import { Keyboard, KeyboardAvoidingView } from "react-native";
+import { Alert, Keyboard, KeyboardAvoidingView } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { PasswordInput } from "../../components/PasswordInput";
 import { useAuth } from "../../hooks/auth";
 import * as ImagePicker from "expo-image-picker";
+import { Button } from "../../components/Button";
+import * as Yup from "yup";
 
 export function Profile() {
   const navigation = useNavigation<any>();
   const theme = useTheme();
   const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
-  const { user, signOut } = useAuth();
+  const { user, signOut, updateUser } = useAuth();
   const [avatar, setAvatar] = useState(user.avatar);
   const [name, setName] = useState(user.name);
   const [driverLicense, setDriverLicense] = useState(user.driver_license);
@@ -61,6 +63,55 @@ export function Profile() {
     }
   }
 
+  async function handleProfileUpdate() {
+    try {
+      const schema = Yup.object().shape({
+        driverLicense: Yup.string().required(
+          "Carteira de habilitação obrigatório"
+        ),
+        name: Yup.string().required("Nome é obrigatório"),
+      });
+
+      const data = { name, driverLicense };
+      await schema.validate(data);
+
+      await updateUser({
+        id: user.id,
+        user_id: user.user_id,
+        email: user.email,
+        name,
+        driver_license: driverLicense,
+        avatar,
+        token: user.token,
+      });
+
+      Alert.alert("Perfil atualizado");
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        return Alert.alert("Opa", error.message);
+      } else {
+        return Alert.alert("Opa", "Erro ao atualizar o perfil");
+      }
+    }
+  }
+
+  async function handleSignOut() {
+    Alert.alert(
+      "Tem certeza?",
+      "Se você sair, irá precisar de internet para conectar-se novamente.",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => {},
+         
+        },
+        {
+          text: "Confirmar",
+          onPress: () => signOut(),
+        },
+      ]
+    );
+  }
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -69,7 +120,7 @@ export function Profile() {
             <HeaderTop>
               <BackButton color={theme.colors.shape} onPress={handleBack} />
               <HeaderTitle>Editar perfil</HeaderTitle>
-              <LogoutButton onPress={signOut}>
+              <LogoutButton onPress={handleSignOut}>
                 <Feather name="power" size={24} color={theme.colors.shape} />
               </LogoutButton>
             </HeaderTop>
@@ -137,6 +188,7 @@ export function Profile() {
                 />
               </Section>
             )}
+            <Button title="Salvar alterações" onPress={handleProfileUpdate} />
           </Content>
         </Container>
       </TouchableWithoutFeedback>
