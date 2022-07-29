@@ -41,7 +41,7 @@ export function PasswordInput({ iconName, value, ...rest }: Props) {
         />
       </IconContainer>
       <InputText
-      
+        autoCorrect={false}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...rest}

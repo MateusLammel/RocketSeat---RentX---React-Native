@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Keyboard,
@@ -12,15 +12,11 @@ import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Footer, Form, Header, SubTitle, Title } from "./styles";
 import * as Yup from "yup";
-import { User } from "../../database/models/User";
-import { userSchema } from "../../database/schema/userSchema";
-import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigation<any>();
   const { signIn } = useAuth();
 
   async function handleSignIn() {
@@ -36,7 +32,7 @@ export function SignIn() {
         email,
         password,
       });
-      
+
       signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
@@ -93,9 +89,7 @@ export function SignIn() {
             />
             <Button
               title="Criar conta gratuita"
-              onPress={() => {
-                navigate.navigate("FirstStep");
-              }}
+              onPress={() => {}}
               enabled={true}
               loading={false}
               color={theme.colors.background_secondary}
