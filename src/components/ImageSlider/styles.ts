@@ -1,10 +1,6 @@
 import { Dimensions } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
-
-interface ImageIndexProps {
-  active: boolean;
-}
+import FastImage from "react-native-fast-image";
 
 export const Container = styled.View`
   width: 100%;
@@ -18,7 +14,7 @@ export const ImageIndexes = styled.View`
 
 export const ImageWrapper = styled.View``;
 
-export const CarImage = styled.Image`
+export const CarImage = styled(FastImage)`
   width: 290px;
   height: 180px;
 `;

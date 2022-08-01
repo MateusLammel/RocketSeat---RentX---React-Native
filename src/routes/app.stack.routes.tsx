@@ -23,6 +23,7 @@ export function StackRoutes() {
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
       <Screen name="SchedulingDetails" component={SchedulingDetails} />
+      <Screen name="Confirmation" component={Confirmation} />
     </Navigator>
   );
 }
