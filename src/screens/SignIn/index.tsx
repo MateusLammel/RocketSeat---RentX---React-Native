@@ -83,9 +83,7 @@ export function SignIn() {
           <Footer>
             <Button
               title="Login"
-              onPress={() => {
-                handleSignIn;
-              }}
+              onPress={handleSignIn}
               enabled={true}
               loading={false}
             />

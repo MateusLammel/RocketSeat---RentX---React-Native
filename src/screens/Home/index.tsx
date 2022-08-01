@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import {
+  Alert,
   BackHandler,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { CarList, Container, Header, HeaderContent, TotalCars } from "./styles";
 import Logo from "../../assets/logo.svg";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Car } from "../../components/Car";
 import { useNavigation } from "@react-navigation/native";
+import { synchronize } from "@nozbe/watermelondb/sync";
 import api from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 import { Load } from "../../components/Load";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
+import { Car as ModelCar } from "../../database/models/Car";
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
@@ -22,6 +26,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { LoadAnimation } from "../../components/LoadAnimation";
+import { database } from "../../database";
 const ButtonAnimated = Animated.createAnimatedComponent(TouchableOpacity);
 
 type Navigator = {
@@ -29,31 +34,62 @@ type Navigator = {
 };
 
 export function Home() {
-  const [cars, setCars] = useState<CarDTO[]>();
+  const [cars, setCars] = useState<ModelCar[]>();
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation<Navigator>();
   const theme = useTheme();
+  const netInfo = useNetInfo();
+
+  async function offlineSynchronize() {
+    await synchronize({
+      database,
+      pullChanges: async ({ lastPulledAt }) => {
+        const response = await api.get(
+          `cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`
+        );
+     
+
+        const { changes, latestVersion } = response.data;
+   console.log("#############TESTE" + changes + "###########TESTE");
+        return { changes, timestamp: latestVersion };
+      },
+      pushChanges: async ({ changes }) => {
+        const user = changes.users;
+        await api.post(`users/sync`, user);
+      },
+    });
+  }
 
   useEffect(() => {
+    let isMounted = true;
+
     async function fetchCars() {
       try {
-        const response = await api.get("/cars");
-        setCars(response.data);
+        const carCollection = database.get<ModelCar>("cars");
+        const carsConst = await carCollection.query().fetch();
+
+        if (isMounted) {
+          setCars(carsConst);
+        }
       } catch (error) {
-        console.log(error);
+        console.log(error, "Erro ao buscar carros");
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     }
-
     fetchCars();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      return true;
-    });
-  }, []);
+    if (netInfo.isConnected === true) {
+      offlineSynchronize();
+    }
+  }, [netInfo.isConnected]);
 
   function handleCarDetails(car: CarDTO) {
     navigation.navigate("CarDetails", { car });
@@ -86,6 +122,14 @@ export function Home() {
     },
     onEnd() {},
   });
+
+  useEffect(() => {
+    if (netInfo.isConnected) {
+      Alert.alert("Você está conectado!");
+    } else {
+      Alert.alert("Você está sem internet");
+    }
+  }, []);
 
   return (
     <Container>

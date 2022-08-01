@@ -47,6 +47,25 @@ export function SecondStep() {
     if (password != passwordConfirm) {
       return Alert.alert("As senhas não são iguais");
     }
+
+    await api
+      .post("/users", {
+        name: user.name,
+        email: user.email,
+        password,
+        driver_license: user.driverLicense,
+      })
+      .then(() => {
+        navigation.navigate("Confirmation", {
+          title: "Conta criada!",
+          message: `Agora é só fazer login\ne aproveitar`,
+          nextScreen: "SignIn",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert("Erro", "Não foi possível fazer o cadastro");
+      });
   }
 
   function handleBack() {
