@@ -27,6 +27,7 @@ import { useAuth } from "../../hooks/auth";
 import * as ImagePicker from "expo-image-picker";
 import { Button } from "../../components/Button";
 import * as Yup from "yup";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export function Profile() {
   const navigation = useNavigation<any>();
@@ -36,13 +37,18 @@ export function Profile() {
   const [avatar, setAvatar] = useState(user.avatar);
   const [name, setName] = useState(user.name);
   const [driverLicense, setDriverLicense] = useState(user.driver_license);
+  const netInfo = useNetInfo();
 
   function handleBack() {
     navigation.goBack();
   }
 
   function handleOptionChange(optionSelected: "dataEdit" | "passwordEdit") {
-    setOption(optionSelected);
+    if (netInfo.isConnected === false && optionSelected === "passwordEdit") {
+      Alert.alert("Para mudar a senha, conecte-se a internet");
+    } else {
+      setOption(optionSelected);
+    }
   }
 
   async function handleSelectAvatar() {
@@ -103,7 +109,6 @@ export function Profile() {
         {
           text: "Cancelar",
           onPress: () => {},
-         
         },
         {
           text: "Confirmar",

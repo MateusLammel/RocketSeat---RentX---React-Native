@@ -33,12 +33,14 @@ interface AuthContextData {
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => Promise<void>;
   updateUser: (user: User) => Promise<void>;
+  load: boolean;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderPops) {
   const [data, setData] = useState<User>({} as User);
+  const [load, setLoad] = useState(true);
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
@@ -106,7 +108,6 @@ function AuthProvider({ children }: AuthProviderPops) {
     async function loadUserData() {
       const userCollection = database.get<ModelUser>("users");
       const response = await userCollection.query().fetch();
-      console.log(response);
 
       if (response.length > 0) {
         const userData = response[0]._raw as unknown as User;
@@ -114,6 +115,7 @@ function AuthProvider({ children }: AuthProviderPops) {
           "Authorization"
         ] = `Bearer ${userData.token}`;
         setData(userData);
+        setLoad(false);
       }
     }
 
@@ -121,7 +123,9 @@ function AuthProvider({ children }: AuthProviderPops) {
   });
 
   return (
-    <AuthContext.Provider value={{ user: data, signIn, signOut, updateUser }}>
+    <AuthContext.Provider
+      value={{ user: data, signIn, signOut, updateUser, load }}
+    >
       {children}
     </AuthContext.Provider>
   );

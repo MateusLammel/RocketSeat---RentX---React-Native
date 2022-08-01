@@ -13,8 +13,9 @@ import {
   Rent,
   Type,
 } from "./styles";
-import { CarDTO } from "../../dtos/CarDTO";
 import { getAcessoryIcon } from "../../utils/getAcessoryIcon";
+import { Car as ModelCar } from "../../database/models/Car";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 interface CarData {
   brand: string;
@@ -26,14 +27,14 @@ interface CarData {
   thumbnail: string;
 }
 
-interface Props extends TouchableOpacityProps{
-  data: CarDTO;
+interface Props extends TouchableOpacityProps {
+  data: ModelCar;
 }
 
 export function Car({ data, ...rest }: Props) {
+  const EngineIcon = getAcessoryIcon(data.fuel_type);
+  const netInfo = useNetInfo();
 
-  const EngineIcon = getAcessoryIcon(data.fuel_type)
- 
   return (
     <Container {...rest}>
       <Details>
@@ -42,7 +43,7 @@ export function Car({ data, ...rest }: Props) {
         <About>
           <Rent>
             <Period>{data.period}</Period>
-            <Price>R$ {data.price}</Price>
+            <Price>R$ {netInfo.isConnected ? data.price : "-"}</Price>
           </Rent>
           <Type>
             <EngineIcon />

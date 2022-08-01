@@ -59,12 +59,13 @@ export function SecondStep() {
         navigation.navigate("Confirmation", {
           title: "Conta criada!",
           message: `Agora é só fazer login\ne aproveitar`,
-          nextScreen: "SignIn"
+          nextScreen: "SignIn",
         });
-      }).catch((error) => {
-        console.log(error)
-        Alert.alert("Erro", "Não foi possível fazer o cadastro")
       })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert("Erro", "Não foi possível fazer o cadastro");
+      });
   }
 
   function handleBack() {

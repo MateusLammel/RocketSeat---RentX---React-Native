@@ -141,6 +141,7 @@ export function SchedulingDetails() {
           </Rent>
         </Details>
 
+        
         <Accessories>
           {car.accessories.map((accessory) => (
             <Accessory
