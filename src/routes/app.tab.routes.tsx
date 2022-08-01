@@ -9,8 +9,7 @@ import PeopleSVG from "../assets/people.svg";
 import { useTheme } from "styled-components";
 import { Platform } from "react-native";
 import { Profile } from "../screens/Profile";
-import Forcesvg from '../assets/force.svg'
- 
+
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export function TabRoutes() {
@@ -34,7 +33,7 @@ export function TabRoutes() {
         component={StackRoutes}
         options={{
           tabBarIcon: ({ color }) => (
-            <Forcesvg width={24} height={24}  />
+            <HomeSVG width={24} height={24} fill={color} />
           ),
         }}
       />
@@ -44,7 +43,7 @@ export function TabRoutes() {
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Forcesvg width={24} height={24}  />
+            <PeopleSVG width={24} height={24} fill={color} />
           ),
         }}
       />
@@ -53,7 +52,7 @@ export function TabRoutes() {
         component={MyCars}
         options={{
           tabBarIcon: ({ color }) => (
-            <Forcesvg width={24} height={24}  />
+            <CarSVG width={24} height={24} fill={color} />
           ),
         }}
       />
