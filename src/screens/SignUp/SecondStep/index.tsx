@@ -41,7 +41,7 @@ export function SecondStep() {
 
   const { user } = route.params as UserParams;
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!passwordConfirm || !password) {
       return Alert.alert("Informe a senha e a confirmação");
     }
