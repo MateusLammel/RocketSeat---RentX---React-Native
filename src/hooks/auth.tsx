@@ -40,9 +40,10 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderPops) {
   const [data, setData] = useState<User>({} as User);
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
 
   async function signIn({ email, password }: SignInCredentials) {
+    setLoad(true)
     try {
       const response = await api.post("/sessions", {
         email,
@@ -50,6 +51,7 @@ function AuthProvider({ children }: AuthProviderPops) {
       });
 
       const { token, user } = response.data;
+      
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       const userCollection = database.get<ModelUser>("users");
@@ -67,6 +69,8 @@ function AuthProvider({ children }: AuthProviderPops) {
       });
 
       setData({ token, ...user });
+
+
     } catch (error) {
       throw new Error(error);
     }
@@ -115,8 +119,8 @@ function AuthProvider({ children }: AuthProviderPops) {
           "Authorization"
         ] = `Bearer ${userData.token}`;
         setData(userData);
-        setLoad(false);
       }
+      setLoad(false);
     }
 
     loadUserData();

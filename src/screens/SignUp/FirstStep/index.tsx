@@ -58,7 +58,6 @@ export function FirstStep() {
     async function loadData() {
       const userCollection = database.get("users");
       const users = await userCollection.query().fetch();
-      console.log(users);
     }
     loadData();
   }, []);

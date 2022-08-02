@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Keyboard,
@@ -13,10 +13,14 @@ import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Footer, Form, Header, SubTitle, Title } from "./styles";
 import * as Yup from "yup";
 
+import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/auth";
+
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const theme = useTheme();
+  const navigate = useNavigation<any>();
+  const { signIn, load } = useAuth();
 
   async function handleSignIn() {
     try {
@@ -31,6 +35,8 @@ export function SignIn() {
         email,
         password,
       });
+
+      signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         return Alert.alert("Opa", error.message);
@@ -40,6 +46,7 @@ export function SignIn() {
     }
   }
 
+  const theme = useTheme();
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -80,12 +87,14 @@ export function SignIn() {
             <Button
               title="Login"
               onPress={handleSignIn}
-              enabled={true}
-              loading={false}
+              enabled={!load}
+              loading={load}
             />
             <Button
               title="Criar conta gratuita"
-              onPress={() => {}}
+              onPress={() => {
+                navigate.navigate("FirstStep");
+              }}
               enabled={true}
               loading={false}
               color={theme.colors.background_secondary}
