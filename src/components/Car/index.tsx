@@ -1,6 +1,5 @@
-import { Text, TouchableOpacityProps, View } from "react-native";
-import React, { Component } from "react";
-import GasolineSvg from "../../assets/gasoline.svg";
+import {  TouchableOpacityProps } from "react-native";
+import React from "react";
 import {
   About,
   Brand,

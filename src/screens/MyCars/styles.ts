@@ -10,25 +10,25 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  height: 400px;
+  height: 350px;
   background-color: ${({ theme }) => theme.colors.header};
   padding: 25px;
   justify-content: center;
-  padding-top: ${getStatusBarHeight() + 8}px;
+  padding-top: ${getStatusBarHeight() + 25}px;
 `;
 
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_600};
   color: ${({ theme }) => theme.colors.shape};
   font-size: ${RFValue(30)}px;
-  margin-top: 40px;
+  margin-top: 30px;
 `;
 
 export const SubTitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_400};
   color: ${({ theme }) => theme.colors.shape};
   font-size: ${RFValue(15)}px;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 export const Content = styled.View`

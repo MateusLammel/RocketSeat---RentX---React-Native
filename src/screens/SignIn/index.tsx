@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Keyboard,
@@ -12,12 +12,11 @@ import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Footer, Form, Header, SubTitle, Title } from "./styles";
 import * as Yup from "yup";
-import { User } from "../../database/models/User";
-import { userSchema } from "../../database/schema/userSchema";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const theme = useTheme();
 
   async function handleSignIn() {
     try {
@@ -41,9 +40,6 @@ export function SignIn() {
     }
   }
 
-  
-
-  const theme = useTheme();
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

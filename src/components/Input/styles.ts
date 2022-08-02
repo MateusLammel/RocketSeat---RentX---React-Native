@@ -1,4 +1,3 @@
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { css } from "styled-components";
 import styled from "styled-components/native";
@@ -10,8 +9,6 @@ interface Props {
 export const Container = styled.View`
   flex-direction: row;
   margin-bottom: 8px;
-
-  
 `;
 
 export const IconContainer = styled.View<Props>`
@@ -36,5 +33,4 @@ export const InputText = styled.TextInput`
   font-family: ${({ theme }) => theme.fonts.primary_400};
   font-size: ${RFValue(15)}px;
   padding: 0 23px;
- 
 `;

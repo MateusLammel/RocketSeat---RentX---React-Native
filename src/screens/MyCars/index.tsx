@@ -21,11 +21,9 @@ import {
   SubTitle,
   Title,
 } from "./styles";
-
 import { LoadAnimation } from "../../components/LoadAnimation";
 import { Car as ModelCar } from "../../database/models/Car";
 import { format, parseISO } from "date-fns";
-
 interface DataProps {
   id: string;
   car: ModelCar;
@@ -59,7 +57,6 @@ export function MyCars() {
         setLoading(false);
       }
     }
-
     fetchCars();
   }, [screenFocus]);
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { Container, IconContainer, InputText } from "./styles";
 import { useTheme } from "styled-components";
 import { Feather } from "@expo/vector-icons";

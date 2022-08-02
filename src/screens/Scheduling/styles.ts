@@ -1,4 +1,3 @@
-import { StatusBar } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { RFValue } from "react-native-responsive-fontsize";
 import { css } from "styled-components";

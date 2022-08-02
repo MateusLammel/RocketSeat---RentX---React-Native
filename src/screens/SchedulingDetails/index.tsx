@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Alert, StatusBar, Text } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
-import SpeedSvg from "../../assets/speed.svg";
-import AccelerationSvg from "../../assets/acceleration.svg";
-import GasolineSvg from "../../assets/gasoline.svg";
-import ExchangeSvg from "../../assets/exchange.svg";
-import PeopleSvg from "../../assets/people.svg";
-import ForceSvg from "../../assets/force.svg";
 import { Feather } from "@expo/vector-icons";
-
 import { ImageSlider } from "../../components/ImageSlider";
 import {
   Name,
@@ -37,7 +30,6 @@ import {
   DateValue,
 } from "./styles";
 import { Button } from "../../components/Button";
-
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 import { useNavigation, useRoute } from "@react-navigation/native";

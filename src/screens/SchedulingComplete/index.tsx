@@ -2,7 +2,6 @@ import React from "react";
 import LogoSvg from "../../assets/logo_background_gray.svg";
 import DoneSvg from "../../assets/done.svg";
 import { Container, Content, Footer, Message, Title } from "./styles";
-import { useTheme } from "styled-components";
 import { useWindowDimensions } from "react-native";
 import { ConfirmButton } from "../../components/ConfirmButton";
 import { useNavigation } from "@react-navigation/native";

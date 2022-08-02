@@ -1,4 +1,3 @@
-import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import {
@@ -38,7 +37,9 @@ export const Details = styled.View`
   justify-content: space-between;
   margin-top: 20px;
 `;
-export const Description = styled.View``;
+export const Description = styled.View`
+  max-width: 62%;
+`;
 export const Brand = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.text_detail};

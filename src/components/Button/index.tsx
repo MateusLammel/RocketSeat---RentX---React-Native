@@ -1,5 +1,4 @@
 import React from "react";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Container, Title } from "./styles";
 import { useTheme } from "styled-components";
 import { ActivityIndicator, TouchableOpacityProps } from "react-native";
@@ -27,7 +26,7 @@ export function Button({
       {...rest}
       color={color}
       enabled={enabled}
-      style={{ opacity: enabled === false || loading == true ? 0.5 : 1 }}
+      style={{ opacity:  loading == true ? 0.5 : 1 }}
     >
       {loading ? (
         <ActivityIndicator color={theme.colors.shape} />

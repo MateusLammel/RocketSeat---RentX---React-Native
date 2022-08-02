@@ -10,7 +10,6 @@ import { useTheme } from "styled-components";
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
 import { Button } from "../../../components/Button";
-import { Input } from "../../../components/Input";
 import { PasswordInput } from "../../../components/PasswordInput";
 import api from "../../../services/api";
 import {
@@ -68,7 +67,6 @@ export function SecondStep() {
         Alert.alert("Erro", "Não foi possível fazer o cadastro");
       });
   }
-
   function handleBack() {
     navigation.goBack();
   }
@@ -79,18 +77,15 @@ export function SecondStep() {
         <Container>
           <Header>
             <BackButton onPress={handleBack} />
-
             <Steps>
               <Bullet active />
               <Bullet />
             </Steps>
           </Header>
-
           <Title>Crie sua {"\n"}conta</Title>
           <SubTitle>
             Faça seu cadastro de {"\n"}de forma rápida e fácil
           </SubTitle>
-
           <Form>
             <FormTitle> 2. Senha</FormTitle>
             <PasswordInput
@@ -106,7 +101,6 @@ export function SecondStep() {
               value={passwordConfirm}
             />
           </Form>
-
           <Button
             title="Cadastrar"
             color={theme.colors.success}

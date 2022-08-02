@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useTheme } from "styled-components";
 import { Container } from "./styles";
 import BrandSvg from "../../assets/brand.svg";
 import LogoSvg from "../../assets/logo.svg";

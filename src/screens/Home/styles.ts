@@ -1,5 +1,4 @@
-import { FlatList, TouchableOpacity } from "react-native";
-
+import { FlatList } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { Car } from "../../database/models/Car";

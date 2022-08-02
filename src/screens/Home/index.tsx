@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Alert,
-  BackHandler,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
@@ -15,7 +14,6 @@ import { useNavigation } from "@react-navigation/native";
 import { synchronize } from "@nozbe/watermelondb/sync";
 import api from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
-import { Load } from "../../components/Load";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
 import { Car as ModelCar } from "../../database/models/Car";
@@ -27,6 +25,7 @@ import Animated, {
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { LoadAnimation } from "../../components/LoadAnimation";
 import { database } from "../../database";
+
 const ButtonAnimated = Animated.createAnimatedComponent(TouchableOpacity);
 
 type Navigator = {
@@ -47,10 +46,8 @@ export function Home() {
         const response = await api.get(
           `cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`
         );
-     
 
         const { changes, latestVersion } = response.data;
-   console.log("#############TESTE" + changes + "###########TESTE");
         return { changes, timestamp: latestVersion };
       },
       pushChanges: async ({ changes }) => {
@@ -129,7 +126,7 @@ export function Home() {
     } else {
       Alert.alert("Você está sem internet");
     }
-  }, []);
+  }, [netInfo.isConnected]);
 
   return (
     <Container>

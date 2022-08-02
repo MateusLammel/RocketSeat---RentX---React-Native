@@ -1,5 +1,4 @@
 import React from "react";
-import { Home } from "../screens/Home";
 import { MyCars } from "../screens/MyCars";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StackRoutes } from "./app.stack.routes";

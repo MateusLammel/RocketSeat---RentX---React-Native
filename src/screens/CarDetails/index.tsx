@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
-
 import { ImageSlider } from "../../components/ImageSlider";
 import {
   Name,
@@ -111,6 +110,7 @@ export function CarDetails() {
         <Button
           enabled={netInfo.isConnected ? true : false}
           title="Escolher período do aluguel"
+          loading={false}
           onPress={handleScheduling}
         />
 

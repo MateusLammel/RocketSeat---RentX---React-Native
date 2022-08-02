@@ -1,8 +1,7 @@
-import { StatusBar, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import {
-  getBottomSpace,
   getStatusBarHeight,
 } from "react-native-iphone-x-helper";
 import { css } from "styled-components";
@@ -90,4 +89,6 @@ export const OptionTitle = styled.Text<OptionProps>`
     active ? theme.fonts.secondary_600 : theme.fonts.secondary_500}; ;
 `;
 
-export const Section = styled.View``;
+export const Section = styled.View`
+  margin-bottom: 30px;
+`;

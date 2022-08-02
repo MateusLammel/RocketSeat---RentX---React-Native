@@ -12,8 +12,6 @@ import { Bullet } from "../../../components/Bullet";
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 import { database } from "../../../database";
-import { User } from "../../../database/models/User";
-import { userSchema } from "../../../database/schema/userSchema";
 import {
   Container,
   Form,
@@ -26,7 +24,6 @@ import {
 
 export function FirstStep() {
   const navigation = useNavigation<any>();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [driverLicense, setDriverLicense] = useState("");
@@ -48,7 +45,6 @@ export function FirstStep() {
       });
 
       const data = { name, email, driverLicense };
-
       await schema.validate(data);
       navigation.navigate("SecondStep", { user: data });
     } catch (error) {
@@ -64,7 +60,6 @@ export function FirstStep() {
       const users = await userCollection.query().fetch();
       console.log(users);
     }
-
     loadData();
   }, []);
 
@@ -74,18 +69,15 @@ export function FirstStep() {
         <Container>
           <Header>
             <BackButton onPress={handleBack} />
-
             <Steps>
               <Bullet active />
               <Bullet />
             </Steps>
           </Header>
-
           <Title>Crie sua {"\n"}conta</Title>
           <SubTitle>
             Faça seu cadastro de {"\n"}de forma rápida e fácil
           </SubTitle>
-
           <Form>
             <FormTitle> 1. Dados</FormTitle>
             <Input
@@ -109,7 +101,6 @@ export function FirstStep() {
               value={driverLicense}
             />
           </Form>
-
           <Button title="Próximo" onPress={handleNextStep} />
         </Container>
       </TouchableWithoutFeedback>
